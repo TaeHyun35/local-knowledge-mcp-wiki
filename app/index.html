@@ -13,7 +13,14 @@
         <h1>AI Governance<br>Control Wiki</h1>
         <p><span class="ok"></span>validate OK · MCP served</p>
       </div>
-      <input class="search" value="prompt injection" aria-label="search">
+      <label class="search-label" for="searchInput">Search wiki</label>
+      <input id="searchInput" class="search" value="" placeholder="title, type, source..." aria-label="search">
+      <div class="filters" role="group" aria-label="page filters">
+        <button class="filter active" data-filter="all" type="button">All</button>
+        <button class="filter" data-filter="risk" type="button">Risk</button>
+        <button class="filter" data-filter="control" type="button">Control</button>
+        <button class="filter" data-filter="framework" type="button">Framework</button>
+      </div>
       <div class="nav-section">
         <h2>Risks</h2>
         <div id="riskList"></div>
@@ -30,9 +37,9 @@
     <main class="content">
       <header class="topbar">
         <div>
-          <span class="pill">risk</span>
-          <span class="pill ok">mvp_validated</span>
-          <span class="muted">NIST AI RMF · OWASP LLM Top 10 · MITRE ATLAS</span>
+          <span class="pill" id="pageTypePill">risk</span>
+          <span class="pill ok" id="reviewPill">mvp_validated</span>
+          <span class="muted" id="pathText">wiki/concepts/prompt-injection.md</span>
         </div>
         <div class="stats">
           <strong id="pageCount">0</strong> pages
@@ -41,6 +48,7 @@
       </header>
       <article class="page">
         <h2 id="pageTitle">Prompt Injection</h2>
+        <div class="meta-strip" id="metaStrip"></div>
         <section>
           <h3>Summary</h3>
           <p id="summaryText"></p>
@@ -81,6 +89,11 @@
         </section>
         <section>
           <h3>Wiki Graph Preview</h3>
+          <div class="graph-legend">
+            <span class="legend risk"></span>Risk
+            <span class="legend control"></span>Control
+            <span class="legend framework"></span>Framework
+          </div>
           <div id="graph" class="graph"></div>
         </section>
       </article>
@@ -102,6 +115,7 @@
       </div>
       <div class="toolbox">
         <h3>MCP Tools</h3>
+        <p class="panel-note">Click a tool to inspect the JSON-RPC call and preview result.</p>
         <div id="toolList"></div>
       </div>
       <div class="health">

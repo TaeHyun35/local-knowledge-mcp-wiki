@@ -14,6 +14,7 @@ def main() -> None:
     app = ROOT / "app"
     app.mkdir(exist_ok=True)
     pages = list_pages()["pages"]
+    page_details = {page["slug"]: read_page(page["slug"])["page"] for page in pages}
     selected = read_page("prompt-injection")
     data = {
         "project": "AI Governance Control Wiki",
@@ -24,6 +25,7 @@ def main() -> None:
             "needs_review": len([p for p in pages if p["review_status"] == "needs_review"]),
         },
         "pages": pages,
+        "pageDetails": page_details,
         "selected": selected,
         "mapping": map_risk_to_controls("prompt-injection"),
         "search": search_wiki("oversight", limit=5),
