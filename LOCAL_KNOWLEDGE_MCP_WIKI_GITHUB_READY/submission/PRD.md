@@ -32,12 +32,15 @@ AI 거버넌스 지식은 NIST, OWASP, MITRE, EU AI Act, ISO/IEC 42001처럼 여
 | FR7 | Query 기록 | `save_query_note()`가 `wiki/queries/`에 Markdown 기록을 만든다. |
 | FR8 | MCP Resources | `resources/list`, `resources/read`가 Wiki 페이지를 `wiki://slug` 리소스로 제공한다. |
 | FR9 | MCP Prompts | `prompts/list`, `prompts/get`이 답변/리뷰 프롬프트 템플릿을 제공한다. |
-| FR10 | MVP GUI | `app/index.html`이 페이지, 도구, 그래프, health status를 보여준다. |
+| FR10 | MVP GUI | `app/index.html`이 페이지, 도구, Source Coverage, Evidence Trace, Reading Deck, 그래프, health status를 보여준다. |
 | FR11 | Agent SPEC | `docs/AGENT_SPEC.md`가 Agent 역할, 권한, 금지 기능, workflow를 설명한다. |
 | FR12 | Wiki Serving 설명 | README가 무엇을/왜/어떻게 만들었는지와 시각화/도구 사용 방식을 설명한다. |
 | FR13 | Claim trace | `trace_claim("prompt-injection")`이 Evidence Map claim과 raw/wiki evidence를 반환한다. |
 | FR14 | Quality gate | `quality_report()`가 페이지별 점수와 blocking issue count를 반환한다. |
 | FR15 | Draft pipeline | `create_wiki_draft(raw_path, dry_run=true)`가 raw 자료 1건에서 Wiki draft preview를 만든다. |
+| FR16 | Source Coverage UI | 선택 페이지의 source_count, Evidence Map, quality score를 카드로 보여준다. |
+| FR17 | Evidence Trace UI | Raw Source → Wiki Page → Evidence Map → Quality Gate 흐름을 보여주고 관련 Tool로 연결한다. |
+| FR18 | Reading Deck UI | 검토 중인 페이지를 localStorage에 저장하고 다시 선택할 수 있게 한다. |
 
 ## Non-Functional Requirements
 
@@ -111,6 +114,7 @@ AI 거버넌스 지식은 NIST, OWASP, MITRE, EU AI Act, ISO/IEC 42001처럼 여
 6. `trace_claim("prompt-injection")`이 1개 이상 claim을 반환한다.
 7. `create_wiki_draft(..., dry_run=true)`가 파일을 쓰지 않고 preview를 반환한다.
 8. 제출 폴더에 `DOMAIN.md`, `JOURNAL.md`, `PRD.md`, `README.md`, `MVP.png`가 존재한다.
+9. `app/index.html`에서 Source Coverage, Evidence Trace, Reading Deck, fixed-anchor Wiki Graph가 표시된다.
 
 ## Testability Matrix
 
@@ -132,6 +136,7 @@ AI 거버넌스 지식은 NIST, OWASP, MITRE, EU AI Act, ISO/IEC 42001처럼 여
 | maintenance | `powershell ... maintenance_check.ps1` | `Blocking issues: 0` |
 | health report | `powershell ... wiki_health_report.ps1` | `Missing sources: 0`, `Missing evidence map: 0` |
 | GUI data | `python .\scripts\generate_app_data.py` | `app/wiki-data.js` 갱신 |
+| viewer behavior | `app/index.html` 수동 확인 | Source Coverage, Evidence Trace, Reading Deck, Graph node click 동작 |
 
 ## Automated Harness Expectations
 
@@ -172,4 +177,4 @@ AI 거버넌스 지식은 NIST, OWASP, MITRE, EU AI Act, ISO/IEC 42001처럼 여
 - Draft 생성은 기존 파일을 덮어쓰지 않아야 한다.
 - `raw/` 외부 파일은 draft 입력으로 사용할 수 없어야 한다.
 
-파일 갱신 시각: 2026-06-15 00:00:00 +09:00
+파일 갱신 시각: 2026-06-15 19:45:00 +09:00

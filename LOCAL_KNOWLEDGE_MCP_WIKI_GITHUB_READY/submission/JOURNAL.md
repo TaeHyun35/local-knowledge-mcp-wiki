@@ -68,6 +68,7 @@
 | 3 | 유지보수 점검을 실행 | `review-needed`가 오류처럼 보일 수 있음 | maintenance 출력 기준을 `Blocking issues`와 `Review queue`로 분리 |
 | 4 | 추가 기능 후보를 검토 | 기능이 기존 health/report와 중복될 수 있음 | read-only grading summary로 범위를 제한하고 `submission_manifest`, `source_coverage`, `trace_page`를 추가 |
 | 5 | 특별 기능 3종을 더 넣을 것인가? | 추가 | claim 단위 출처 추적, 품질 점수화, raw-to-draft 파이프라인은 최종 GitHub 제품 요구와 직접 연결된다. |
+| 6 | viewer와 문서를 최종 점검 | 그래프 간선 anchor, 상단 metadata 겹침, README/PRD/SPEC 설명 불일치가 남을 수 있음 | fixed-anchor graph, metadata overflow 처리, Source Coverage/Evidence Trace/Reading Deck 문서화를 반영 |
 
 ## 결정 근거 상세
 
@@ -98,4 +99,8 @@ MCP 사양은 서버 기능으로 Tools, Resources, Prompts를 둔다. 과제는
 | `quality_report` | 페이지별 품질 점수와 blocking issue count를 반환한다. | 기존 health report를 대체하지 않고 하네스용 구조화 요약만 제공한다. |
 | `create_wiki_draft` | raw 자료 1건에서 검토 대기 Wiki draft를 만들거나 dry-run preview를 제공한다. | stable page 자동 승격은 하지 않는다. |
 
-파일 갱신 시각: 2026-06-15 00:00:00 +09:00
+## 최종 무결성 결정
+
+Viewer는 단순 캡처용 화면이 아니라 제출자가 실제로 페이지를 선택하고 MCP Tool 결과를 확인하는 정적 제품이어야 한다. 따라서 `app/index.html`은 Source Coverage, Evidence Trace, Reading Deck, fixed-anchor Wiki Graph를 제공하고, 모든 관련 문서에는 이 기능과 연결 MCP Tool을 명시한다.
+
+파일 갱신 시각: 2026-06-15 19:45:00 +09:00

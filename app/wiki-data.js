@@ -1728,13 +1728,13 @@ window.WIKI_DATA = {
         "exists": true,
         "path": "submission/PRD.md",
         "resolved_path": "ai-governance-mcp-wiki/submission/PRD.md",
-        "bytes": 10147
+        "bytes": 10818
       },
       "README.md": {
         "exists": true,
         "path": "submission/README.md",
         "resolved_path": "ai-governance-mcp-wiki/submission/README.md",
-        "bytes": 10169
+        "bytes": 10897
       },
       "MVP.png": {
         "exists": true,

@@ -60,7 +60,7 @@ docs/AGENT_SPEC.md       Agent 역할, 권한, Wiki Serving SPEC
 | 무엇을 만들 것인가? | AI Governance / AI Risk Control을 대상으로 하는 Markdown-only LLM Wiki와 MCP Wiki Tool을 만든다. |
 | 왜 만들 것인가? | 분산된 AI 위험/통제 지식을 출처, Evidence Map, 검토 상태, risk-control 연결과 함께 Agent가 재현 가능하게 사용하도록 하기 위해서다. |
 | 어떻게 만들 것인가? | `raw/` 원천 자료, `wiki/concepts/` Markdown pages, `mcp_server/` JSON-RPC Tool 서버, `app/` 정적 GUI로 구성한다. |
-| 어떤 방식으로 시각화할 것인가? | `app/index.html`과 `MVP.png`에서 페이지 목록, 선택 페이지, Evidence Map, 연결 controls, graph, Agent panel, health status를 보여준다. |
+| 어떤 방식으로 시각화할 것인가? | `app/index.html`과 `MVP.png`에서 페이지 목록, 선택 페이지, Evidence Map, Source Coverage, Evidence Trace, Reading Deck, 연결 controls, fixed-anchor graph, MCP Inspector, health status를 보여준다. |
 | 도구 활용에 필요한 기능은 무엇인가? | 검색, 읽기, 목록, risk-control mapping, graph, maintenance check, source coverage, page trace, claim trace, quality report, draft pipeline, submission manifest가 필요하다. |
 | Tool과 AI Agent는 어떻게 연결되는가? | Agent 또는 하네스가 stdin/stdout JSON-RPC로 `mcp_server/server.py`를 호출하고, 서버가 `wiki_core.py`를 통해 Markdown Wiki를 조회한다. |
 | Agent SPEC은 어디에 있는가? | 상세 역할, 권한, 금지 기능, 챗봇/편집 workflow는 `project/docs/AGENT_SPEC.md`에 있다. |
@@ -120,7 +120,7 @@ python .\mcp_server\server.py
 GUI 확인:
 
 ```text
-app/index.html
+http://localhost:8000/app/index.html
 ```
 
 ## JSON-RPC 요청 예시
@@ -141,6 +141,16 @@ app/index.html
 | `trace_claim` | Evidence Map claim이 어떤 raw source 또는 wiki link에 근거하는지 추적한다. | `found: true`, `claim_count >= 1`, `raw_refs` 또는 `wiki_refs` 반환 |
 | `quality_report` | 페이지별 frontmatter, source, Evidence Map, wikilink 품질을 점수화한다. | `status: pass`, `blocking_issue_count: 0`, unknown page는 `status: fail` |
 | `create_wiki_draft` | raw 자료 1건에서 검토 대기 draft를 만들거나 dry-run preview를 반환한다. | `raw/` 외부 경로 거부, dry-run은 파일 미작성, 기존 draft 덮어쓰기 방지 |
+
+## Viewer 특별 기능 3종
+
+| 기능 | 화면 위치 | 연결 MCP Tool |
+| --- | --- | --- |
+| Source Coverage | 선택 페이지 아래 coverage cards | `source_coverage` |
+| Evidence Trace | Raw Source → Wiki Page → Evidence Map → Quality Gate 단계 | `source_coverage`, `read_page`, `trace_claim`, `quality_report` |
+| Reading Deck | 검토 중인 페이지 저장 목록 | client-side localStorage, repository write 없음 |
+
+Wiki Graph Preview는 risk/control/framework 노드의 좌우 anchor를 통일해 간선이 임의 위치가 아니라 노드 경계에 연결되도록 구현했다.
 
 ## 검증 기준
 
@@ -203,7 +213,7 @@ Blocking issues: 0
 
 ## MVP Image Caption
 
-`MVP.png`는 Wiki page list, 선택된 risk page, Evidence Map, related controls, governance agent panel, MCP Tool 목록, health status, risk-control-framework graph를 보여주는 정적 GUI 캡처다.
+`MVP.png`는 Wiki page list, 선택된 risk page, Evidence Map, related controls, Source Coverage, Evidence Trace, Reading Deck, MCP Inspector, MCP Tool 목록, health status, risk-control-framework graph를 보여주는 정적 GUI 캡처다.
 
 ## Write Tool Safety
 
@@ -228,4 +238,4 @@ Blocking issues: 0
 - Wiki 내용은 MVP용 curated source note를 기반으로 하며 전체 표준 문서 전문 동기화는 하지 않는다.
 - Draft page의 stable promotion은 사람 검토 후 수행한다.
 
-파일 갱신 시각: 2026-06-15 00:00:00 +09:00
+파일 갱신 시각: 2026-06-15 19:45:00 +09:00

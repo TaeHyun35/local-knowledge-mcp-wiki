@@ -57,16 +57,29 @@ pages=13 risks=4 graph_edges=65
 ### 4. Viewer 실행
 
 ```powershell
-python -m http.server 8000 -d viewer
+python -m http.server 8000
 ```
 
 브라우저에서 엽니다.
 
 ```text
-http://localhost:8000
+http://localhost:8000/app/index.html
 ```
 
-`viewer/index.html`은 실제 viewer인 `app/index.html`로 연결됩니다.
+왼쪽 페이지 목록, 검색창, type 필터, Related Controls 카드, Source Coverage, Evidence Trace, Reading Deck, 그래프 노드를 클릭할 수 있습니다. 오른쪽 MCP Inspector에서 Tool 버튼을 누르면 해당 Tool의 JSON-RPC 요청 예시와 현재 선택 페이지 기준 결과가 바뀝니다.
+
+`http://localhost:8000/`로 접속하면 Python 기본 directory listing이 보일 수 있습니다. 실제 동적 Wiki Viewer는 항상 `http://localhost:8000/app/index.html`에서 엽니다. `viewer/index.html`은 호환용 리다이렉트 페이지입니다.
+
+### Viewer 기능
+
+| 기능 | 설명 |
+| --- | --- |
+| 페이지 탐색 | Risk, Control, Framework 페이지를 검색하고 type 필터로 좁힙니다. |
+| MCP Inspector | 선택 페이지 기준으로 `tools/call` JSON-RPC 요청과 미리보기 결과를 보여줍니다. |
+| Source Coverage | 선택 페이지의 declared sources, resolved sources, Evidence Map, quality score를 카드로 보여줍니다. |
+| Evidence Trace | Raw Source → Wiki Page → Evidence Map → Quality Gate 흐름을 단계형으로 보여줍니다. |
+| Reading Deck | 검토 중인 페이지를 브라우저 localStorage에 저장하고 다시 선택할 수 있습니다. |
+| Wiki Graph Preview | risk-control-framework 노드를 보여주며, 간선은 노드의 오른쪽/왼쪽 앵커에 맞춰 연결됩니다. |
 
 ## 자기 자료 1건으로 첫 Wiki Draft 만들기
 
@@ -197,4 +210,4 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintenance_check.
 
 이 repo는 public으로 게시해야 평가 조건을 만족합니다. 검색 노출을 줄이고 싶다면 repo 이름, description, topic, README에 특정 학교명/과목명/강의명을 넣지 않는 편이 좋습니다.
 
-파일 갱신 시각: 2026-06-15 00:00:00 +09:00
+파일 갱신 시각: 2026-06-15 19:45:00 +09:00

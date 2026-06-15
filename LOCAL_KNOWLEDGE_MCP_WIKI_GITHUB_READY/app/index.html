@@ -13,7 +13,14 @@
         <h1>AI Governance<br>Control Wiki</h1>
         <p><span class="ok"></span>validate OK · MCP served</p>
       </div>
-      <input class="search" value="prompt injection" aria-label="search">
+      <label class="search-label" for="searchInput">Search wiki</label>
+      <input id="searchInput" class="search" value="" placeholder="title, type, source..." aria-label="search">
+      <div class="filters" role="group" aria-label="page filters">
+        <button class="filter active" data-filter="all" type="button">All</button>
+        <button class="filter" data-filter="risk" type="button">Risk</button>
+        <button class="filter" data-filter="control" type="button">Control</button>
+        <button class="filter" data-filter="framework" type="button">Framework</button>
+      </div>
       <div class="nav-section">
         <h2>Risks</h2>
         <div id="riskList"></div>
@@ -29,10 +36,10 @@
     </aside>
     <main class="content">
       <header class="topbar">
-        <div>
-          <span class="pill">risk</span>
-          <span class="pill ok">mvp_validated</span>
-          <span class="muted">NIST AI RMF · OWASP LLM Top 10 · MITRE ATLAS</span>
+        <div class="page-meta">
+          <span class="pill" id="pageTypePill">risk</span>
+          <span class="pill ok" id="reviewPill">mvp_validated</span>
+          <span class="muted" id="pathText">wiki/concepts/prompt-injection.md</span>
         </div>
         <div class="stats">
           <strong id="pageCount">0</strong> pages
@@ -41,6 +48,7 @@
       </header>
       <article class="page">
         <h2 id="pageTitle">Prompt Injection</h2>
+        <div class="meta-strip" id="metaStrip"></div>
         <section>
           <h3>Summary</h3>
           <p id="summaryText"></p>
@@ -62,41 +70,75 @@
         <section>
           <h3>Special Wiki Tools</h3>
           <div class="feature-grid">
-            <div class="feature">
+            <button class="feature" data-tool="quality_report" type="button">
               <strong>Quality Gate</strong>
               <span id="qualityStatus">-</span>
               <small id="qualityDetail"></small>
-            </div>
-            <div class="feature">
+            </button>
+            <button class="feature" data-tool="trace_claim" type="button">
               <strong>Claim Trace</strong>
               <span id="claimTrace">-</span>
               <small id="claimTraceDetail"></small>
-            </div>
-            <div class="feature">
+            </button>
+            <button class="feature" data-tool="create_wiki_draft" type="button">
               <strong>Draft Pipeline</strong>
               <span id="draftPipeline">-</span>
               <small id="draftPipelineDetail"></small>
-            </div>
+            </button>
           </div>
         </section>
         <section>
+          <h3>Source Coverage</h3>
+          <div class="coverage-grid" id="coverageGrid"></div>
+        </section>
+        <section>
+          <h3>Evidence Trace</h3>
+          <div class="trace-panel">
+            <div id="traceSteps" class="trace-steps"></div>
+            <div id="traceDetail" class="trace-detail"></div>
+          </div>
+        </section>
+        <section>
+          <h3>Reading Deck</h3>
+          <div class="deck-toolbar">
+            <button id="favoritePage" class="deck-action" type="button">Save current page</button>
+            <span id="deckStatus" role="status">No saved pages yet.</span>
+          </div>
+          <div id="readingDeck" class="reading-deck"></div>
+        </section>
+        <section>
           <h3>Wiki Graph Preview</h3>
-          <div id="graph" class="graph"></div>
+          <div class="graph-toolbar">
+            <div class="graph-legend">
+              <span class="legend risk"></span>Risk
+              <span class="legend control"></span>Control
+              <span class="legend framework"></span>Framework
+            </div>
+            <div class="graph-selection">Selected: <strong id="graphSelectedLabel">Prompt Injection</strong></div>
+          </div>
+          <div id="graph" class="graph" aria-label="Interactive wiki graph"></div>
+          <p class="graph-hint">Click a node to switch pages. Bright links show the selected page neighborhood.</p>
         </section>
       </article>
     </main>
     <aside class="agent">
       <header>
-        <h2>Governance Agent</h2>
-        <button>Reset</button>
+        <h2>MCP Inspector</h2>
+        <button id="resetView" type="button">Reset</button>
       </header>
-      <div class="message user">What controls map to prompt injection?</div>
-      <div class="message bot">
-        <strong>MCP Tool:</strong> map_risk_to_controls<br>
-        <span id="mappingText"></span>
+      <div class="inspector-panel">
+        <div class="inspector-meta">
+          <span id="selectedPageType">risk</span>
+          <strong id="selectedPageSlug">prompt-injection</strong>
+        </div>
+        <h3 id="selectedToolName">map_risk_to_controls</h3>
+        <p id="selectedToolDescription"></p>
+        <pre id="toolRequest"></pre>
+        <div id="toolResult" class="result-list"></div>
       </div>
       <div class="toolbox">
         <h3>MCP Tools</h3>
+        <p class="panel-note">Click a tool to inspect the JSON-RPC call and preview result.</p>
         <div id="toolList"></div>
       </div>
       <div class="health">

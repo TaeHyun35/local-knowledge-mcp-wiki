@@ -125,6 +125,440 @@ window.WIKI_DATA = {
       "path": "wiki/concepts/tool-permission-boundary.md"
     }
   ],
+  "pageDetails": {
+    "audit-logging": {
+      "slug": "audit-logging",
+      "title": "Audit Logging",
+      "type": "control",
+      "review_status": "mvp_validated",
+      "quality_class": "source-linked",
+      "confidence": "0.72",
+      "path": "wiki/concepts/audit-logging.md",
+      "meta": {
+        "title": "Audit Logging",
+        "type": "control",
+        "status": "draft",
+        "quality_class": "source-linked",
+        "review_status": "mvp_validated",
+        "confidence": "0.72",
+        "control_category": "Traceability",
+        "mitigates": [
+          "sensitive-information-disclosure",
+          "excessive-agency",
+          "model-evaluation-gap"
+        ],
+        "frameworks": [
+          "NIST AI RMF",
+          "ISO/IEC 42001"
+        ],
+        "source_count": "2",
+        "sources": [
+          "raw/ai_governance/nist-ai-rmf.md",
+          "raw/ai_governance/iso-iec-42001-overview.md"
+        ],
+        "source_hashes": "[]",
+        "stale": "false",
+        "created": "2026-06-04",
+        "updated": "2026-06-04"
+      },
+      "text": "---\ntitle: \"Audit Logging\"\ntype: control\nstatus: draft\nquality_class: source-linked\nreview_status: mvp_validated\nconfidence: 0.72\ncontrol_category: \"Traceability\"\nmitigates:\n  - sensitive-information-disclosure\n  - excessive-agency\n  - model-evaluation-gap\nframeworks:\n  - NIST AI RMF\n  - ISO/IEC 42001\nsource_count: 2\nsources:\n  - raw/ai_governance/nist-ai-rmf.md\n  - raw/ai_governance/iso-iec-42001-overview.md\nsource_hashes: []\nstale: false\ncreated: 2026-06-04\nupdated: 2026-06-04\n---\n\n# Audit Logging\n\n## Summary\n\nAudit Logging records important wiki and agent actions so that source changes, query notes, and maintenance results can be reviewed later.\n\n## Control Objective\n\nProvide traceability for agent actions and wiki quality changes.\n\n## Related Risks\n\n- [[sensitive-information-disclosure|Sensitive Information Disclosure]]\n- [[excessive-agency|Excessive Agency]]\n- [[model-evaluation-gap|Model Evaluation Gap]]\n\n## Evidence Map\n\n| Claim | Evidence | Status |\n| --- | --- | --- |\n| Governance systems need documentation and accountability evidence. | `raw/ai_governance/nist-ai-rmf.md` | mvp_validated |\n| Management-system framing supports process records and improvement. | `raw/ai_governance/iso-iec-42001-overview.md` | mvp_validated |\n\n## Implementation Notes\n\n- `logs/ingest-log.md` records source ingestion.\n- `logs/maintenance-log.md` records maintenance checks.\n- `wiki/queries/` stores user query notes.\n\n## Open Questions\n\n- Should tool-call logs be separated from maintenance logs?\n\n## Maintenance Notes\n\n- MVP_REVIEWED: Add MCP tool-call examples after smoke testing.\n\nFile updated at: 2026-06-14 18:30:00 +09:00\n\n\n"
+    },
+    "eu-ai-act": {
+      "slug": "eu-ai-act",
+      "title": "EU AI Act",
+      "type": "framework",
+      "review_status": "mvp_validated",
+      "quality_class": "source-linked",
+      "confidence": "0.72",
+      "path": "wiki/concepts/eu-ai-act.md",
+      "meta": {
+        "title": "EU AI Act",
+        "type": "framework",
+        "status": "draft",
+        "quality_class": "source-linked",
+        "review_status": "mvp_validated",
+        "confidence": "0.72",
+        "source_count": "1",
+        "sources": [
+          "raw/ai_governance/eu-ai-act.md"
+        ],
+        "source_hashes": "[]",
+        "stale": "false",
+        "created": "2026-06-04",
+        "updated": "2026-06-04"
+      },
+      "text": "---\ntitle: \"EU AI Act\"\ntype: framework\nstatus: draft\nquality_class: source-linked\nreview_status: mvp_validated\nconfidence: 0.72\nsource_count: 1\nsources:\n  - raw/ai_governance/eu-ai-act.md\nsource_hashes: []\nstale: false\ncreated: 2026-06-04\nupdated: 2026-06-04\n---\n\n# EU AI Act\n\n## Summary\n\nThe EU AI Act provides regulatory vocabulary for risk classification, documentation, transparency, human oversight, and monitoring.\n\n## Key Points\n\n- Useful for regulatory framing.\n- Connects to oversight and documentation controls.\n- Helps explain why governance evidence matters.\n\n## Source Links\n\n- `raw/ai_governance/eu-ai-act.md`\n\n## Evidence Map\n\n| Claim | Evidence | Status |\n| --- | --- | --- |\n| The EU AI Act supports risk-based AI governance vocabulary. | `raw/ai_governance/eu-ai-act.md` | mvp_validated |\n\n## Related Concepts\n\n- [[human-oversight-gate|Human Oversight Gate]]\n- [[sensitive-information-disclosure|Sensitive Information Disclosure]]\n\n## Open Questions\n\n- Should specific articles be tracked in a later version?\n\n## Maintenance Notes\n\n- MVP_REVIEWED: MVP uses this page as a regulatory anchor only.\n\nFile updated at: 2026-06-14 18:30:00 +09:00\n\n\n"
+    },
+    "evaluation-and-monitoring": {
+      "slug": "evaluation-and-monitoring",
+      "title": "Evaluation and Monitoring",
+      "type": "control",
+      "review_status": "mvp_validated",
+      "quality_class": "source-linked",
+      "confidence": "0.74",
+      "path": "wiki/concepts/evaluation-and-monitoring.md",
+      "meta": {
+        "title": "Evaluation and Monitoring",
+        "type": "control",
+        "status": "draft",
+        "quality_class": "source-linked",
+        "review_status": "mvp_validated",
+        "confidence": "0.74",
+        "control_category": "Quality Assurance",
+        "mitigates": [
+          "model-evaluation-gap"
+        ],
+        "frameworks": [
+          "NIST AI RMF",
+          "NIST AI RMF Playbook"
+        ],
+        "source_count": "2",
+        "sources": [
+          "raw/ai_governance/nist-ai-rmf.md",
+          "raw/ai_governance/nist-ai-rmf-playbook.md"
+        ],
+        "source_hashes": "[]",
+        "stale": "false",
+        "created": "2026-06-04",
+        "updated": "2026-06-04"
+      },
+      "text": "---\ntitle: \"Evaluation and Monitoring\"\ntype: control\nstatus: draft\nquality_class: source-linked\nreview_status: mvp_validated\nconfidence: 0.74\ncontrol_category: \"Quality Assurance\"\nmitigates:\n  - model-evaluation-gap\nframeworks:\n  - NIST AI RMF\n  - NIST AI RMF Playbook\nsource_count: 2\nsources:\n  - raw/ai_governance/nist-ai-rmf.md\n  - raw/ai_governance/nist-ai-rmf-playbook.md\nsource_hashes: []\nstale: false\ncreated: 2026-06-04\nupdated: 2026-06-04\n---\n\n# Evaluation and Monitoring\n\n## Summary\n\nEvaluation and Monitoring is a control that checks wiki quality, source coverage, evidence completeness, and review queue status.\n\n## Control Objective\n\nEnsure that governance claims remain source-linked, reviewed, and visible in health reports.\n\n## Related Risks\n\n- [[model-evaluation-gap|Model Evaluation Gap]]\n\n## Evidence Map\n\n| Claim | Evidence | Status |\n| --- | --- | --- |\n| Measurement and monitoring are core to risk management. | `raw/ai_governance/nist-ai-rmf.md` | mvp_validated |\n| Playbook actions can be operationalized as quality checks. | `raw/ai_governance/nist-ai-rmf-playbook.md` | mvp_validated |\n\n## Implementation Notes\n\n- `run_maintenance_check` checks missing sources and missing Evidence Map sections.\n- `wiki_health_report` summarizes page quality and review queue status.\n\n## Open Questions\n\n- Should the GUI show per-framework quality coverage?\n\n## Maintenance Notes\n\n- MVP_REVIEWED: Add health report screenshot evidence to submission.\n\nFile updated at: 2026-06-14 18:30:00 +09:00\n\n\n"
+    },
+    "excessive-agency": {
+      "slug": "excessive-agency",
+      "title": "Excessive Agency",
+      "type": "risk",
+      "review_status": "mvp_validated",
+      "quality_class": "source-linked",
+      "confidence": "0.74",
+      "path": "wiki/concepts/excessive-agency.md",
+      "meta": {
+        "title": "Excessive Agency",
+        "type": "risk",
+        "status": "draft",
+        "quality_class": "source-linked",
+        "review_status": "mvp_validated",
+        "confidence": "0.74",
+        "risk_category": "Agentic Tool Use",
+        "frameworks": [
+          "OWASP LLM Top 10",
+          "NIST AI RMF"
+        ],
+        "related_controls": [
+          "tool-permission-boundary",
+          "human-oversight-gate",
+          "audit-logging"
+        ],
+        "source_count": "2",
+        "sources": [
+          "raw/ai_governance/owasp-llm-top10.md",
+          "raw/ai_governance/nist-ai-rmf.md"
+        ],
+        "source_hashes": "[]",
+        "stale": "false",
+        "created": "2026-06-04",
+        "updated": "2026-06-04"
+      },
+      "text": "---\ntitle: \"Excessive Agency\"\ntype: risk\nstatus: draft\nquality_class: source-linked\nreview_status: mvp_validated\nconfidence: 0.74\nrisk_category: \"Agentic Tool Use\"\nframeworks:\n  - OWASP LLM Top 10\n  - NIST AI RMF\nrelated_controls:\n  - tool-permission-boundary\n  - human-oversight-gate\n  - audit-logging\nsource_count: 2\nsources:\n  - raw/ai_governance/owasp-llm-top10.md\n  - raw/ai_governance/nist-ai-rmf.md\nsource_hashes: []\nstale: false\ncreated: 2026-06-04\nupdated: 2026-06-04\n---\n\n# Excessive Agency\n\n## Summary\n\nExcessive agency is the risk that an AI agent can perform actions beyond the user's intended scope, especially when it can call tools, edit files, or trigger external systems.\n\n## Risk Definition\n\nThe risk grows when an agent has broad tool permissions, unclear goals, weak approval boundaries, or no audit trail.\n\n## Why It Matters\n\nThe project itself exposes MCP tools to agents. Therefore the wiki must document which tools are read-only, which tools write files, and which tools require human approval.\n\n## Related Controls\n\n- [[tool-permission-boundary|Tool Permission Boundary]]\n- [[human-oversight-gate|Human Oversight Gate]]\n- [[audit-logging|Audit Logging]]\n\n## Evidence Map\n\n| Claim | Evidence | Status |\n| --- | --- | --- |\n| Agentic systems require explicit tool-use boundaries. | `raw/ai_governance/owasp-llm-top10.md` | mvp_validated |\n| Risk management requires governance and management functions. | `raw/ai_governance/nist-ai-rmf.md` | mvp_validated |\n\n## Detection Signals\n\n- Agent requests write actions when a read action would suffice.\n- Tool calls are not traceable to a user goal.\n- Agent tries to modify raw source files.\n\n## Mitigation Notes\n\n- Separate read-only and write-capable MCP tools.\n- Keep `raw/` immutable.\n- Use review queues for any generated concept page update.\n\n## Open Questions\n\n- Should `save_query_note` require explicit user confirmation in a full implementation?\n\n## Maintenance Notes\n\n- MVP_REVIEWED: Connect this risk to the final Agent Role SPEC.\n\nFile updated at: 2026-06-14 18:30:00 +09:00\n\n\n"
+    },
+    "human-oversight-gate": {
+      "slug": "human-oversight-gate",
+      "title": "Human Oversight Gate",
+      "type": "control",
+      "review_status": "mvp_validated",
+      "quality_class": "source-linked",
+      "confidence": "0.73",
+      "path": "wiki/concepts/human-oversight-gate.md",
+      "meta": {
+        "title": "Human Oversight Gate",
+        "type": "control",
+        "status": "draft",
+        "quality_class": "source-linked",
+        "review_status": "mvp_validated",
+        "confidence": "0.73",
+        "control_category": "Governance Process",
+        "mitigates": [
+          "prompt-injection",
+          "sensitive-information-disclosure",
+          "excessive-agency"
+        ],
+        "frameworks": [
+          "EU AI Act",
+          "NIST AI RMF"
+        ],
+        "source_count": "2",
+        "sources": [
+          "raw/ai_governance/eu-ai-act.md",
+          "raw/ai_governance/nist-ai-rmf.md"
+        ],
+        "source_hashes": "[]",
+        "stale": "false",
+        "created": "2026-06-04",
+        "updated": "2026-06-04"
+      },
+      "text": "---\ntitle: \"Human Oversight Gate\"\ntype: control\nstatus: draft\nquality_class: source-linked\nreview_status: mvp_validated\nconfidence: 0.73\ncontrol_category: \"Governance Process\"\nmitigates:\n  - prompt-injection\n  - sensitive-information-disclosure\n  - excessive-agency\nframeworks:\n  - EU AI Act\n  - NIST AI RMF\nsource_count: 2\nsources:\n  - raw/ai_governance/eu-ai-act.md\n  - raw/ai_governance/nist-ai-rmf.md\nsource_hashes: []\nstale: false\ncreated: 2026-06-04\nupdated: 2026-06-04\n---\n\n# Human Oversight Gate\n\n## Summary\n\nHuman Oversight Gate is a control that requires human review before high-impact actions, stable knowledge promotion, or sensitive updates.\n\n## Control Objective\n\nKeep accountability in the loop when an agent proposes changes that affect governance knowledge, permissions, or source interpretation.\n\n## Related Risks\n\n- [[prompt-injection|Prompt Injection]]\n- [[sensitive-information-disclosure|Sensitive Information Disclosure]]\n- [[excessive-agency|Excessive Agency]]\n\n## Evidence Map\n\n| Claim | Evidence | Status |\n| --- | --- | --- |\n| Oversight is part of AI governance and risk management. | `raw/ai_governance/nist-ai-rmf.md` | mvp_validated |\n| Regulatory frameworks discuss human oversight for AI systems. | `raw/ai_governance/eu-ai-act.md` | mvp_validated |\n\n## Implementation Notes\n\n- Pages can remain `draft` until reviewed.\n- `quality_class: stable` requires explicit review.\n- The MVP uses review queue counts to make oversight visible.\n\n## Open Questions\n\n- Which actions should require mandatory approval in a production version?\n\n## Maintenance Notes\n\n- MVP_REVIEWED: Add final Agent Role SPEC references.\n\nFile updated at: 2026-06-14 18:30:00 +09:00\n\n\n"
+    },
+    "mitre-atlas": {
+      "slug": "mitre-atlas",
+      "title": "MITRE ATLAS",
+      "type": "framework",
+      "review_status": "mvp_validated",
+      "quality_class": "source-linked",
+      "confidence": "0.73",
+      "path": "wiki/concepts/mitre-atlas.md",
+      "meta": {
+        "title": "MITRE ATLAS",
+        "type": "framework",
+        "status": "draft",
+        "quality_class": "source-linked",
+        "review_status": "mvp_validated",
+        "confidence": "0.73",
+        "source_count": "1",
+        "sources": [
+          "raw/ai_governance/mitre-atlas.md"
+        ],
+        "source_hashes": "[]",
+        "stale": "false",
+        "created": "2026-06-04",
+        "updated": "2026-06-04"
+      },
+      "text": "---\ntitle: \"MITRE ATLAS\"\ntype: framework\nstatus: draft\nquality_class: source-linked\nreview_status: mvp_validated\nconfidence: 0.73\nsource_count: 1\nsources:\n  - raw/ai_governance/mitre-atlas.md\nsource_hashes: []\nstale: false\ncreated: 2026-06-04\nupdated: 2026-06-04\n---\n\n# MITRE ATLAS\n\n## Summary\n\nMITRE ATLAS provides adversarial AI concepts used to connect AI risks to attack techniques and defensive controls.\n\n## Key Points\n\n- Useful for adversarial AI threat framing.\n- Supports prompt injection and model behavior risk analysis.\n- Complements OWASP and NIST framing.\n\n## Source Links\n\n- `raw/ai_governance/mitre-atlas.md`\n\n## Evidence Map\n\n| Claim | Evidence | Status |\n| --- | --- | --- |\n| MITRE ATLAS is used for adversarial AI risk mapping. | `raw/ai_governance/mitre-atlas.md` | mvp_validated |\n\n## Related Concepts\n\n- [[prompt-injection|Prompt Injection]]\n- [[tool-permission-boundary|Tool Permission Boundary]]\n\n## Open Questions\n\n- Which ATLAS technique pages should be added in a full version?\n\n## Maintenance Notes\n\n- MVP_REVIEWED: Keep ATLAS scope small for MVP.\n\nFile updated at: 2026-06-14 18:30:00 +09:00\n\n\n"
+    },
+    "model-evaluation-gap": {
+      "slug": "model-evaluation-gap",
+      "title": "Model Evaluation Gap",
+      "type": "risk",
+      "review_status": "mvp_validated",
+      "quality_class": "source-linked",
+      "confidence": "0.71",
+      "path": "wiki/concepts/model-evaluation-gap.md",
+      "meta": {
+        "title": "Model Evaluation Gap",
+        "type": "risk",
+        "status": "draft",
+        "quality_class": "source-linked",
+        "review_status": "mvp_validated",
+        "confidence": "0.71",
+        "risk_category": "Evaluation and Monitoring",
+        "frameworks": [
+          "NIST AI RMF",
+          "NIST AI RMF Playbook"
+        ],
+        "related_controls": [
+          "evaluation-and-monitoring",
+          "risk-inventory"
+        ],
+        "source_count": "2",
+        "sources": [
+          "raw/ai_governance/nist-ai-rmf.md",
+          "raw/ai_governance/nist-ai-rmf-playbook.md"
+        ],
+        "source_hashes": "[]",
+        "stale": "false",
+        "created": "2026-06-04",
+        "updated": "2026-06-04"
+      },
+      "text": "---\ntitle: \"Model Evaluation Gap\"\ntype: risk\nstatus: draft\nquality_class: source-linked\nreview_status: mvp_validated\nconfidence: 0.71\nrisk_category: \"Evaluation and Monitoring\"\nframeworks:\n  - NIST AI RMF\n  - NIST AI RMF Playbook\nrelated_controls:\n  - evaluation-and-monitoring\n  - risk-inventory\nsource_count: 2\nsources:\n  - raw/ai_governance/nist-ai-rmf.md\n  - raw/ai_governance/nist-ai-rmf-playbook.md\nsource_hashes: []\nstale: false\ncreated: 2026-06-04\nupdated: 2026-06-04\n---\n\n# Model Evaluation Gap\n\n## Summary\n\nModel evaluation gap is the risk that an AI system is deployed or used without clear evaluation criteria, quality gates, monitoring signals, or review evidence.\n\n## Risk Definition\n\nThe gap appears when a system has claims about reliability or safety but lacks measurable tests, audit evidence, or ongoing monitoring.\n\n## Why It Matters\n\nAn LLM Wiki can become stale or misleading if source claims are not reviewed. The wiki therefore needs maintenance checks and health reports.\n\n## Related Controls\n\n- [[evaluation-and-monitoring|Evaluation and Monitoring]]\n- [[risk-inventory|Risk Inventory]]\n- [[audit-logging|Audit Logging]]\n\n## Evidence Map\n\n| Claim | Evidence | Status |\n| --- | --- | --- |\n| AI risk management requires measurement and monitoring. | `raw/ai_governance/nist-ai-rmf.md` | mvp_validated |\n| Playbook-style actions help turn risk concepts into checks. | `raw/ai_governance/nist-ai-rmf-playbook.md` | mvp_validated |\n\n## Detection Signals\n\n- No health report exists.\n- Evidence Map is missing.\n- Source claims are marked stable without review.\n\n## Mitigation Notes\n\n- Run `run_maintenance_check`.\n- Generate a wiki health report before submission.\n- Keep `review_status` explicit.\n\n## Open Questions\n\n- What confidence threshold should allow a page to become stable?\n\n## Maintenance Notes\n\n- MVP_REVIEWED: Add rubric-aligned acceptance criteria after MVP validation.\n\nFile updated at: 2026-06-14 18:30:00 +09:00\n\n\n"
+    },
+    "nist-ai-rmf": {
+      "slug": "nist-ai-rmf",
+      "title": "NIST AI RMF",
+      "type": "framework",
+      "review_status": "mvp_validated",
+      "quality_class": "source-linked",
+      "confidence": "0.78",
+      "path": "wiki/concepts/nist-ai-rmf.md",
+      "meta": {
+        "title": "NIST AI RMF",
+        "type": "framework",
+        "status": "draft",
+        "quality_class": "source-linked",
+        "review_status": "mvp_validated",
+        "confidence": "0.78",
+        "source_count": "2",
+        "sources": [
+          "raw/ai_governance/nist-ai-rmf.md",
+          "raw/ai_governance/nist-ai-rmf-playbook.md"
+        ],
+        "source_hashes": "[]",
+        "stale": "false",
+        "created": "2026-06-04",
+        "updated": "2026-06-04"
+      },
+      "text": "---\ntitle: \"NIST AI RMF\"\ntype: framework\nstatus: draft\nquality_class: source-linked\nreview_status: mvp_validated\nconfidence: 0.78\nsource_count: 2\nsources:\n  - raw/ai_governance/nist-ai-rmf.md\n  - raw/ai_governance/nist-ai-rmf-playbook.md\nsource_hashes: []\nstale: false\ncreated: 2026-06-04\nupdated: 2026-06-04\n---\n\n# NIST AI RMF\n\n## Summary\n\nNIST AI RMF is the umbrella framework used by this wiki to organize governance, mapping, measurement, and management of AI risks.\n\n## Key Points\n\n- Provides high-level risk management functions.\n- Supports documentation and monitoring controls.\n- Connects risk pages to governance processes.\n\n## Source Links\n\n- `raw/ai_governance/nist-ai-rmf.md`\n- `raw/ai_governance/nist-ai-rmf-playbook.md`\n\n## Evidence Map\n\n| Claim | Evidence | Status |\n| --- | --- | --- |\n| NIST AI RMF is the umbrella framework for this wiki. | `raw/ai_governance/nist-ai-rmf.md` | mvp_validated |\n| Playbook-style actions support controls. | `raw/ai_governance/nist-ai-rmf-playbook.md` | mvp_validated |\n\n## Related Concepts\n\n- [[risk-inventory|Risk Inventory]]\n- [[evaluation-and-monitoring|Evaluation and Monitoring]]\n- [[audit-logging|Audit Logging]]\n\n## Open Questions\n\n- Which NIST function should be shown as the primary GUI grouping?\n\n## Maintenance Notes\n\n- MVP_REVIEWED: Add function-specific pages if needed.\n\nFile updated at: 2026-06-14 18:30:00 +09:00\n\n\n"
+    },
+    "owasp-llm-top10": {
+      "slug": "owasp-llm-top10",
+      "title": "OWASP LLM Top 10",
+      "type": "framework",
+      "review_status": "mvp_validated",
+      "quality_class": "source-linked",
+      "confidence": "0.77",
+      "path": "wiki/concepts/owasp-llm-top10.md",
+      "meta": {
+        "title": "OWASP LLM Top 10",
+        "type": "framework",
+        "status": "draft",
+        "quality_class": "source-linked",
+        "review_status": "mvp_validated",
+        "confidence": "0.77",
+        "source_count": "1",
+        "sources": [
+          "raw/ai_governance/owasp-llm-top10.md"
+        ],
+        "source_hashes": "[]",
+        "stale": "false",
+        "created": "2026-06-04",
+        "updated": "2026-06-04"
+      },
+      "text": "---\ntitle: \"OWASP LLM Top 10\"\ntype: framework\nstatus: draft\nquality_class: source-linked\nreview_status: mvp_validated\nconfidence: 0.77\nsource_count: 1\nsources:\n  - raw/ai_governance/owasp-llm-top10.md\nsource_hashes: []\nstale: false\ncreated: 2026-06-04\nupdated: 2026-06-04\n---\n\n# OWASP LLM Top 10\n\n## Summary\n\nOWASP LLM Top 10 is used as the LLM application risk taxonomy for this project.\n\n## Key Points\n\n- Provides LLM application risk categories.\n- Supports risk pages such as Prompt Injection, Sensitive Information Disclosure, and Excessive Agency.\n- Connects application risks to controls and agent tool boundaries.\n\n## Source Links\n\n- `raw/ai_governance/owasp-llm-top10.md`\n\n## Evidence Map\n\n| Claim | Evidence | Status |\n| --- | --- | --- |\n| OWASP LLM Top 10 is the LLM risk taxonomy for this wiki. | `raw/ai_governance/owasp-llm-top10.md` | mvp_validated |\n\n## Related Concepts\n\n- [[prompt-injection|Prompt Injection]]\n- [[sensitive-information-disclosure|Sensitive Information Disclosure]]\n- [[excessive-agency|Excessive Agency]]\n\n## Open Questions\n\n- Should each OWASP category become a separate risk page?\n\n## Maintenance Notes\n\n- MVP_REVIEWED: Expand only categories needed for MVP.\n\nFile updated at: 2026-06-14 18:30:00 +09:00\n\n\n"
+    },
+    "prompt-injection": {
+      "slug": "prompt-injection",
+      "title": "Prompt Injection",
+      "type": "risk",
+      "review_status": "mvp_validated",
+      "quality_class": "source-linked",
+      "confidence": "0.76",
+      "path": "wiki/concepts/prompt-injection.md",
+      "meta": {
+        "title": "Prompt Injection",
+        "type": "risk",
+        "status": "draft",
+        "quality_class": "source-linked",
+        "review_status": "mvp_validated",
+        "confidence": "0.76",
+        "risk_category": "LLM Application Security",
+        "frameworks": [
+          "OWASP LLM Top 10",
+          "MITRE ATLAS"
+        ],
+        "related_controls": [
+          "tool-permission-boundary",
+          "human-oversight-gate",
+          "audit-logging"
+        ],
+        "source_count": "2",
+        "sources": [
+          "raw/ai_governance/owasp-llm-top10.md",
+          "raw/ai_governance/mitre-atlas.md"
+        ],
+        "source_hashes": "[]",
+        "stale": "false",
+        "created": "2026-06-04",
+        "updated": "2026-06-04"
+      },
+      "text": "---\ntitle: \"Prompt Injection\"\ntype: risk\nstatus: draft\nquality_class: source-linked\nreview_status: mvp_validated\nconfidence: 0.76\nrisk_category: \"LLM Application Security\"\nframeworks:\n  - OWASP LLM Top 10\n  - MITRE ATLAS\nrelated_controls:\n  - tool-permission-boundary\n  - human-oversight-gate\n  - audit-logging\nsource_count: 2\nsources:\n  - raw/ai_governance/owasp-llm-top10.md\n  - raw/ai_governance/mitre-atlas.md\nsource_hashes: []\nstale: false\ncreated: 2026-06-04\nupdated: 2026-06-04\n---\n\n# Prompt Injection\n\n## Summary\n\nPrompt injection is an LLM application risk where untrusted instructions attempt to override the intended task, policy, or tool-use boundary. In this wiki, it is treated as a risk that must be mapped to explicit controls before an agent can use tools or update knowledge.\n\n## Risk Definition\n\nPrompt injection can occur when user input, retrieved documents, web pages, or tool outputs contain instructions that conflict with the trusted system or project policy.\n\n## Why It Matters\n\nWiki tools often read external sources. Without clear boundaries, an agent may treat malicious source text as an instruction instead of data.\n\n## Related Controls\n\n- [[tool-permission-boundary|Tool Permission Boundary]]\n- [[human-oversight-gate|Human Oversight Gate]]\n- [[audit-logging|Audit Logging]]\n\n## Evidence Map\n\n| Claim | Evidence | Status |\n| --- | --- | --- |\n| Prompt injection is a major LLM application risk. | `raw/ai_governance/owasp-llm-top10.md` | mvp_validated |\n| Adversarial AI techniques can target model behavior and tool use. | `raw/ai_governance/mitre-atlas.md` | mvp_validated |\n| Tool boundaries reduce the blast radius of malicious instructions. | [[tool-permission-boundary]] | mvp_validated |\n\n## Detection Signals\n\n- Source text contains instructions to ignore prior rules.\n- Retrieved content asks the agent to call tools or reveal secrets.\n- Tool request is unrelated to the user's trusted task.\n\n## Mitigation Notes\n\n- Treat raw documents as data, not instructions.\n- Use `run_maintenance_check` before accepting generated wiki changes.\n- Require human approval for high-impact tool actions.\n\n## Open Questions\n\n- Should indirect prompt injection examples be stored as separate source pages?\n\n## Maintenance Notes\n\n- MVP_REVIEWED: Add specific OWASP section references during source review.\n\nFile updated at: 2026-06-14 18:30:00 +09:00\n\n\n"
+    },
+    "risk-inventory": {
+      "slug": "risk-inventory",
+      "title": "Risk Inventory",
+      "type": "control",
+      "review_status": "mvp_validated",
+      "quality_class": "source-linked",
+      "confidence": "0.73",
+      "path": "wiki/concepts/risk-inventory.md",
+      "meta": {
+        "title": "Risk Inventory",
+        "type": "control",
+        "status": "draft",
+        "quality_class": "source-linked",
+        "review_status": "mvp_validated",
+        "confidence": "0.73",
+        "control_category": "Risk Management",
+        "mitigates": [
+          "sensitive-information-disclosure",
+          "model-evaluation-gap"
+        ],
+        "frameworks": [
+          "NIST AI RMF",
+          "NIST AI RMF Playbook"
+        ],
+        "source_count": "2",
+        "sources": [
+          "raw/ai_governance/nist-ai-rmf.md",
+          "raw/ai_governance/nist-ai-rmf-playbook.md"
+        ],
+        "source_hashes": "[]",
+        "stale": "false",
+        "created": "2026-06-04",
+        "updated": "2026-06-04"
+      },
+      "text": "---\ntitle: \"Risk Inventory\"\ntype: control\nstatus: draft\nquality_class: source-linked\nreview_status: mvp_validated\nconfidence: 0.73\ncontrol_category: \"Risk Management\"\nmitigates:\n  - sensitive-information-disclosure\n  - model-evaluation-gap\nframeworks:\n  - NIST AI RMF\n  - NIST AI RMF Playbook\nsource_count: 2\nsources:\n  - raw/ai_governance/nist-ai-rmf.md\n  - raw/ai_governance/nist-ai-rmf-playbook.md\nsource_hashes: []\nstale: false\ncreated: 2026-06-04\nupdated: 2026-06-04\n---\n\n# Risk Inventory\n\n## Summary\n\nRisk Inventory is a control that keeps track of identified risks, related controls, frameworks, evidence, and review status.\n\n## Control Objective\n\nMake AI governance knowledge searchable and auditable instead of leaving risk decisions in chat history.\n\n## Related Risks\n\n- [[sensitive-information-disclosure|Sensitive Information Disclosure]]\n- [[model-evaluation-gap|Model Evaluation Gap]]\n\n## Evidence Map\n\n| Claim | Evidence | Status |\n| --- | --- | --- |\n| AI risk management needs documented risk context. | `raw/ai_governance/nist-ai-rmf.md` | mvp_validated |\n| A playbook can turn governance questions into maintainable records. | `raw/ai_governance/nist-ai-rmf-playbook.md` | mvp_validated |\n\n## Implementation Notes\n\n- Risks are stored as `type: risk` concept pages.\n- Controls are stored as `type: control` concept pages.\n- `map_risk_to_controls` reads `related_controls` from risk pages.\n\n## Open Questions\n\n- Should risks be scored by severity and likelihood in the MVP?\n\n## Maintenance Notes\n\n- MVP_REVIEWED: Add scoring fields only if needed for final demo.\n\nFile updated at: 2026-06-14 18:30:00 +09:00\n\n\n"
+    },
+    "sensitive-information-disclosure": {
+      "slug": "sensitive-information-disclosure",
+      "title": "Sensitive Information Disclosure",
+      "type": "risk",
+      "review_status": "mvp_validated",
+      "quality_class": "source-linked",
+      "confidence": "0.72",
+      "path": "wiki/concepts/sensitive-information-disclosure.md",
+      "meta": {
+        "title": "Sensitive Information Disclosure",
+        "type": "risk",
+        "status": "draft",
+        "quality_class": "source-linked",
+        "review_status": "mvp_validated",
+        "confidence": "0.72",
+        "risk_category": "Information Protection",
+        "frameworks": [
+          "OWASP LLM Top 10",
+          "EU AI Act"
+        ],
+        "related_controls": [
+          "audit-logging",
+          "human-oversight-gate"
+        ],
+        "source_count": "2",
+        "sources": [
+          "raw/ai_governance/owasp-llm-top10.md",
+          "raw/ai_governance/eu-ai-act.md"
+        ],
+        "source_hashes": "[]",
+        "stale": "false",
+        "created": "2026-06-04",
+        "updated": "2026-06-04"
+      },
+      "text": "---\ntitle: \"Sensitive Information Disclosure\"\ntype: risk\nstatus: draft\nquality_class: source-linked\nreview_status: mvp_validated\nconfidence: 0.72\nrisk_category: \"Information Protection\"\nframeworks:\n  - OWASP LLM Top 10\n  - EU AI Act\nrelated_controls:\n  - audit-logging\n  - human-oversight-gate\nsource_count: 2\nsources:\n  - raw/ai_governance/owasp-llm-top10.md\n  - raw/ai_governance/eu-ai-act.md\nsource_hashes: []\nstale: false\ncreated: 2026-06-04\nupdated: 2026-06-04\n---\n\n# Sensitive Information Disclosure\n\n## Summary\n\nSensitive information disclosure is the risk that an AI system exposes secrets, personal data, confidential records, or internal project material through model output, logs, or connected tools.\n\n## Risk Definition\n\nThe risk includes both direct output leakage and indirect leakage through saved query notes, logs, source summaries, or copied raw content.\n\n## Why It Matters\n\nAn MCP-served wiki can accumulate data from raw sources and user questions. It needs explicit boundaries for what can be stored, displayed, and passed to agents.\n\n## Related Controls\n\n- [[audit-logging|Audit Logging]]\n- [[human-oversight-gate|Human Oversight Gate]]\n- [[risk-inventory|Risk Inventory]]\n\n## Evidence Map\n\n| Claim | Evidence | Status |\n| --- | --- | --- |\n| LLM applications need controls for sensitive information disclosure. | `raw/ai_governance/owasp-llm-top10.md` | mvp_validated |\n| Governance frameworks emphasize documentation and oversight for AI systems. | `raw/ai_governance/eu-ai-act.md` | mvp_validated |\n\n## Detection Signals\n\n- Output contains API keys, tokens, personal data, or confidential identifiers.\n- Query notes contain raw private content.\n- Logs include more data than needed for audit.\n\n## Mitigation Notes\n\n- Redact secrets from wiki pages.\n- Keep raw source paths visible, but avoid copying sensitive raw content into concept pages.\n- Store the minimum answer draft needed for review.\n\n## Open Questions\n\n- Should the MVP include automated secret scanning?\n\n## Maintenance Notes\n\n- MVP_REVIEWED: Add a separate control page for data minimization if scope expands.\n\nFile updated at: 2026-06-14 18:30:00 +09:00\n\n\n"
+    },
+    "tool-permission-boundary": {
+      "slug": "tool-permission-boundary",
+      "title": "Tool Permission Boundary",
+      "type": "control",
+      "review_status": "mvp_validated",
+      "quality_class": "source-linked",
+      "confidence": "0.76",
+      "path": "wiki/concepts/tool-permission-boundary.md",
+      "meta": {
+        "title": "Tool Permission Boundary",
+        "type": "control",
+        "status": "draft",
+        "quality_class": "source-linked",
+        "review_status": "mvp_validated",
+        "confidence": "0.76",
+        "control_category": "Agent Tool Governance",
+        "mitigates": [
+          "prompt-injection",
+          "excessive-agency"
+        ],
+        "frameworks": [
+          "OWASP LLM Top 10",
+          "NIST AI RMF"
+        ],
+        "source_count": "2",
+        "sources": [
+          "raw/ai_governance/owasp-llm-top10.md",
+          "raw/ai_governance/nist-ai-rmf.md"
+        ],
+        "source_hashes": "[]",
+        "stale": "false",
+        "created": "2026-06-04",
+        "updated": "2026-06-04"
+      },
+      "text": "---\ntitle: \"Tool Permission Boundary\"\ntype: control\nstatus: draft\nquality_class: source-linked\nreview_status: mvp_validated\nconfidence: 0.76\ncontrol_category: \"Agent Tool Governance\"\nmitigates:\n  - prompt-injection\n  - excessive-agency\nframeworks:\n  - OWASP LLM Top 10\n  - NIST AI RMF\nsource_count: 2\nsources:\n  - raw/ai_governance/owasp-llm-top10.md\n  - raw/ai_governance/nist-ai-rmf.md\nsource_hashes: []\nstale: false\ncreated: 2026-06-04\nupdated: 2026-06-04\n---\n\n# Tool Permission Boundary\n\n## Summary\n\nTool Permission Boundary is a control that separates read-only tools from write-capable or high-impact tools, and makes tool permissions explicit for agents.\n\n## Control Objective\n\nReduce prompt injection and excessive agency risk by ensuring agents can only call tools that match the user's goal and the agent's role.\n\n## Related Risks\n\n- [[prompt-injection|Prompt Injection]]\n- [[excessive-agency|Excessive Agency]]\n\n## Evidence Map\n\n| Claim | Evidence | Status |\n| --- | --- | --- |\n| Tool permissions should be explicit for agentic systems. | `raw/ai_governance/owasp-llm-top10.md` | mvp_validated |\n| Governance controls should define responsibilities and risk management actions. | `raw/ai_governance/nist-ai-rmf.md` | mvp_validated |\n\n## Implementation Notes\n\n- `search_wiki`, `read_page`, `list_pages`, and `get_wiki_graph` are read-only.\n- `save_query_note` writes to `wiki/queries/`.\n- Raw source files are immutable.\n\n## Open Questions\n\n- Should write tools be disabled by default in the MCP server?\n\n## Maintenance Notes\n\n- MVP_REVIEWED: Align with final README tool table.\n\nFile updated at: 2026-06-14 18:30:00 +09:00\n\n\n"
+    }
+  },
   "selected": {
     "found": true,
     "page": {
@@ -1294,13 +1728,13 @@ window.WIKI_DATA = {
         "exists": true,
         "path": "submission/PRD.md",
         "resolved_path": "ai-governance-mcp-wiki/submission/PRD.md",
-        "bytes": 10147
+        "bytes": 10818
       },
       "README.md": {
         "exists": true,
         "path": "submission/README.md",
         "resolved_path": "ai-governance-mcp-wiki/submission/README.md",
-        "bytes": 10169
+        "bytes": 10897
       },
       "MVP.png": {
         "exists": true,
