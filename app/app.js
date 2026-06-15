@@ -13,7 +13,6 @@
   let savedPages = loadSavedPages();
 
   const typeOrder = { risk: 0, control: 1, framework: 2, query: 3, concept: 4 };
-  const graphLaneX = { risk: 34, control: 340, framework: 650, query: 650, concept: 650 };
 
   function escapeHtml(value) {
     return String(value)
@@ -315,20 +314,44 @@
     renderInspector();
   }
 
-  function graphPosition(node, visibleNodes, groupCounts) {
+  function graphPosition(node, visibleNodes, groupCounts, graphWidth) {
     const total = groupCounts[node.type] || 1;
     const orderInType = visibleNodes.filter((item) => item.type === node.type).findIndex((item) => item.id === node.id);
-    const x = graphLaneX[node.type] ?? (34 + (typeOrder[node.type] ?? 3) * 250);
-    const y = 42 + (orderInType + 1) * (214 / (total + 1));
-    const width = Math.max(112, Math.min(214, node.label.length * 7.4 + 28));
+    const lanes = {
+      risk: 30,
+      control: Math.round(graphWidth * 0.39),
+      framework: Math.max(Math.round(graphWidth * 0.72), graphWidth - 250),
+      query: Math.max(Math.round(graphWidth * 0.72), graphWidth - 250),
+      concept: Math.max(Math.round(graphWidth * 0.72), graphWidth - 250)
+    };
+    const x = lanes[node.type] ?? Math.min(30 + (typeOrder[node.type] ?? 3) * 260, graphWidth - 240);
+    const y = 44 + (orderInType + 1) * (218 / (total + 1));
+    const width = Math.max(132, Math.min(220, node.label.length * 7.4 + 30));
     return { x, y, width };
+  }
+
+  function edgeEndpoints(edge, positioned) {
+    const source = positioned.get(edge.source);
+    const target = positioned.get(edge.target);
+    const sourceRank = typeOrder[source.type] ?? 9;
+    const targetRank = typeOrder[target.type] ?? 9;
+    const left = sourceRank <= targetRank ? source : target;
+    const right = sourceRank <= targetRank ? target : source;
+    return {
+      startX: left.x + left.width,
+      startY: left.y + 16,
+      endX: right.x,
+      endY: right.y + 16
+    };
   }
 
   function renderGraph() {
     const graph = document.getElementById("graph");
+    const graphWidth = Math.max(900, Math.round(graph.clientWidth || 900));
+    graph.style.setProperty("--graph-width", `${graphWidth}px`);
     const visibleNodes = graphNodes.filter((node) => node.type !== "query").slice(0, 13);
     const groupCounts = visibleNodes.reduce((acc, node) => ({ ...acc, [node.type]: (acc[node.type] || 0) + 1 }), {});
-    const positioned = new Map(visibleNodes.map((node) => [node.id, { ...node, ...graphPosition(node, visibleNodes, groupCounts) }]));
+    const positioned = new Map(visibleNodes.map((node) => [node.id, { ...node, ...graphPosition(node, visibleNodes, groupCounts, graphWidth) }]));
     const neighborhood = new Set([selectedSlug]);
     graphEdges.forEach((edge) => {
       if (edge.source === selectedSlug) neighborhood.add(edge.target);
@@ -343,12 +366,7 @@
       });
     const visibleEdges = [...edgeMap.values()];
     const edgeHtml = visibleEdges.map((edge) => {
-      const a = positioned.get(edge.source);
-      const b = positioned.get(edge.target);
-      const startX = a.x + a.width;
-      const startY = a.y + 16;
-      const endX = b.x;
-      const endY = b.y + 16;
+      const { startX, startY, endX, endY } = edgeEndpoints(edge, positioned);
       const bend = Math.max(80, Math.abs(endX - startX) * 0.42);
       const d = `M ${startX} ${startY} C ${startX + bend} ${startY}, ${endX - bend} ${endY}, ${endX} ${endY}`;
       const active = edge.source === selectedSlug || edge.target === selectedSlug;
@@ -360,7 +378,7 @@
       const related = neighborhood.has(node.id);
       return `<button class="node ${node.type} ${active ? "active" : related ? "related" : "dim"}" data-slug="${node.id}" type="button" aria-pressed="${active}" style="left:${node.x}px;top:${node.y}px;width:${node.width}px">${escapeHtml(node.label)}</button>`;
     }).join("");
-    graph.innerHTML = `<svg class="graph-svg" viewBox="0 0 900 320" aria-hidden="true"><defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" /></marker></defs>${edgeHtml}</svg>${nodeHtml}`;
+    graph.innerHTML = `<svg class="graph-svg" viewBox="0 0 ${graphWidth} 320" aria-hidden="true"><defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" /></marker></defs>${edgeHtml}</svg>${nodeHtml}`;
   }
 
   function renderToolButtons() {

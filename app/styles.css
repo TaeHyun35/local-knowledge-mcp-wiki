@@ -96,16 +96,37 @@ button:active { transform: translateY(1px) scale(.99); }
 .topbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   border-bottom: 1px solid var(--line);
   padding-bottom: 14px;
   margin-bottom: 24px;
   gap: 16px;
 }
-.pill { background: #263149; color: #dce6ff; padding: 5px 12px; border-radius: 999px; font-size: 13px; margin-right: 8px; }
+.page-meta {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pill {
+  flex: 0 0 auto;
+  background: #263149;
+  color: #dce6ff;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+}
 .pill.ok { color: #aaf0c8; background: #1d3a2d; }
+#pathText {
+  min-width: 220px;
+  max-width: min(100%, 620px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .muted { color: var(--muted); }
-.stats { color: var(--muted); display: flex; gap: 14px; white-space: nowrap; }
+.stats { flex: 0 0 auto; color: var(--muted); display: flex; gap: 14px; white-space: nowrap; padding-top: 5px; }
 .stats strong { color: #ffffff; }
 .page { max-width: 1080px; }
 .page h2 { font-size: 42px; margin: 0 0 12px; letter-spacing: 0; }
@@ -324,7 +345,8 @@ td { color: #dbe3ef; }
 .legend.framework { background: var(--amber); }
 .graph {
   height: 320px;
-  min-width: 820px;
+  min-width: 900px;
+  width: 100%;
   background:
     linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px),
@@ -375,6 +397,8 @@ td { color: #dbe3ef; }
   text-overflow: ellipsis;
   box-shadow: 0 8px 18px rgba(0, 0, 0, .18);
   z-index: 2;
+  min-height: 32px;
+  line-height: 18px;
 }
 .node.dim { opacity: .42; }
 .node.related { opacity: .92; }
@@ -442,8 +466,10 @@ td { color: #dbe3ef; }
   .content { padding: 20px; }
   .cards, .feature-grid, .meta-strip, .coverage-grid, .trace-steps, .trace-panel { grid-template-columns: 1fr; }
   .topbar { align-items: flex-start; flex-direction: column; }
+  .page-meta { width: 100%; }
+  #pathText { min-width: 0; width: 100%; }
   .page h2 { font-size: 32px; }
-  .graph { min-width: 760px; }
+  .graph { min-width: 900px; }
   .graph-toolbar { align-items: flex-start; flex-direction: column; }
 }
 @media (prefers-reduced-motion: reduce) {
