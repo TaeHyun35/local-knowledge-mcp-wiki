@@ -57,16 +57,16 @@ pages=13 risks=4 graph_edges=65
 ### 4. Viewer 실행
 
 ```powershell
-python -m http.server 8000 -d viewer
+python -m http.server 8000
 ```
 
 브라우저에서 엽니다.
 
 ```text
-http://localhost:8000
+http://localhost:8000/app/index.html
 ```
 
-`viewer/index.html`은 실제 viewer인 `app/index.html`로 연결됩니다.
+왼쪽 페이지 목록, 검색창, Related Controls 카드, 그래프 노드를 클릭할 수 있습니다.
 
 ## 자기 자료 1건으로 첫 Wiki Draft 만들기
 
