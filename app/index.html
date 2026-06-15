@@ -87,13 +87,18 @@
     </main>
     <aside class="agent">
       <header>
-        <h2>Governance Agent</h2>
-        <button>Reset</button>
+        <h2>MCP Inspector</h2>
+        <button id="resetView" type="button">Reset</button>
       </header>
-      <div class="message user">What controls map to prompt injection?</div>
-      <div class="message bot">
-        <strong>MCP Tool:</strong> map_risk_to_controls<br>
-        <span id="mappingText"></span>
+      <div class="inspector-panel">
+        <div class="inspector-meta">
+          <span id="selectedPageType">risk</span>
+          <strong id="selectedPageSlug">prompt-injection</strong>
+        </div>
+        <h3 id="selectedToolName">map_risk_to_controls</h3>
+        <p id="selectedToolDescription"></p>
+        <pre id="toolRequest"></pre>
+        <div id="toolResult" class="result-list"></div>
       </div>
       <div class="toolbox">
         <h3>MCP Tools</h3>

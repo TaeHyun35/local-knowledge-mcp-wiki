@@ -42,10 +42,15 @@ th { color: #b8c0d2; background: #1b2030; }
 .agent header { display: flex; justify-content: space-between; align-items: center; padding: 18px; border-bottom: 1px solid #303647; }
 .agent h2 { margin: 0; font-size: 20px; }
 .agent button { background: #2b3650; color: #dce6ff; border: 0; border-radius: 8px; padding: 8px 12px; }
-.message { margin: 16px 18px 0; padding: 14px; border-radius: 12px; line-height: 1.5; }
-.message.user { background: #2f4168; align-self: flex-end; }
-.message.bot { background: #222837; }
-.toolbox, .health { margin: 18px; background: #121722; border: 1px solid #2f3647; border-radius: 8px; padding: 14px; }
+.inspector-panel, .toolbox, .health { margin: 18px; background: #121722; border: 1px solid #2f3647; border-radius: 8px; padding: 14px; }
+.inspector-meta { display: flex; justify-content: space-between; gap: 10px; color: #9fa9ba; font-size: 12px; margin-bottom: 12px; }
+.inspector-meta span { background: #263149; color: #dce6ff; padding: 4px 8px; border-radius: 999px; }
+.inspector-panel h3 { margin: 0 0 8px; font-size: 18px; }
+.inspector-panel p { margin: 0 0 12px; color: #b7c1d3; line-height: 1.45; }
+.inspector-panel pre { margin: 0 0 12px; max-height: 190px; overflow: auto; white-space: pre-wrap; background: #0d111a; border: 1px solid #2d3445; border-radius: 7px; padding: 10px; color: #b9d2ff; font-size: 12px; }
+.result-list { display: grid; gap: 7px; }
+.result-list div { background: #1b2230; border: 1px solid #30384b; border-radius: 7px; padding: 8px; color: #e1e7f2; font-size: 13px; line-height: 1.35; }
 .toolbox h3, .health h3 { margin: 0 0 10px; }
-.tool { display: inline-block; background: #263149; color: #dce6ff; padding: 6px 8px; border-radius: 7px; margin: 4px; font-size: 12px; }
+.tool { display: inline-block; background: #263149; color: #dce6ff; padding: 6px 8px; border-radius: 7px; margin: 4px; font-size: 12px; border: 1px solid transparent; cursor: pointer; }
+.tool.active { border-color: #7aa2ff; background: #304066; }
 .health p { margin: 8px 0; color: #cfd6e5; }

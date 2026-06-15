@@ -66,7 +66,7 @@ python -m http.server 8000
 http://localhost:8000/app/index.html
 ```
 
-왼쪽 페이지 목록, 검색창, Related Controls 카드, 그래프 노드를 클릭할 수 있습니다.
+왼쪽 페이지 목록, 검색창, Related Controls 카드, 그래프 노드를 클릭할 수 있습니다. 오른쪽 MCP Inspector에서 Tool 버튼을 누르면 해당 Tool의 JSON-RPC 요청 예시와 현재 선택 페이지 기준 결과가 바뀝니다.
 
 ## 자기 자료 1건으로 첫 Wiki Draft 만들기
 
