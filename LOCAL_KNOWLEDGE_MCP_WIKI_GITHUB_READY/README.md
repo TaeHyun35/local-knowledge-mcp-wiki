@@ -204,10 +204,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\maintenance_check.
 
 `demo/mvp.png`는 실제 지식베이스가 viewer에 렌더링된 화면 캡처입니다.
 
-![MVP demo](demo/mvp.png)
+![MVP demo](demo/mvp.png?raw=1&v=20260615-1938)
 
 ## Repo 공개 주의
 
 이 repo는 public으로 게시해야 평가 조건을 만족합니다. 검색 노출을 줄이고 싶다면 repo 이름, description, topic, README에 특정 학교명/과목명/강의명을 넣지 않는 편이 좋습니다.
 
-파일 갱신 시각: 2026-06-15 19:45:00 +09:00
+파일 갱신 시각: 2026-06-15 19:38:52 +09:00

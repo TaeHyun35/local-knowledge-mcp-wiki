@@ -41,7 +41,7 @@ button:active { transform: translateY(1px) scale(.99); }
 .sidebar { border-right: 1px solid var(--line); padding: 20px; }
 .brand h1 { font-size: 25px; line-height: 1.1; margin: 0 0 8px; letter-spacing: 0; }
 .brand p { color: var(--muted); margin: 0 0 22px; }
-.ok { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--green); margin-right: 6px; }
+.brand .ok { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--green); margin-right: 6px; }
 .search-label { display: block; color: var(--muted); font-size: 12px; margin-bottom: 7px; }
 .search {
   width: 100%;
@@ -103,6 +103,7 @@ button:active { transform: translateY(1px) scale(.99); }
   gap: 16px;
 }
 .page-meta {
+  flex: 1 1 auto;
   min-width: 0;
   display: flex;
   align-items: center;
@@ -117,10 +118,12 @@ button:active { transform: translateY(1px) scale(.99); }
   border-radius: 999px;
   font-size: 13px;
 }
-.pill.ok { color: #aaf0c8; background: #1d3a2d; }
+.page-meta .pill.ok { color: #aaf0c8; background: #1d3a2d; }
 #pathText {
-  min-width: 220px;
-  max-width: min(100%, 620px);
+  flex: 1 1 260px;
+  min-width: 0;
+  max-width: 620px;
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
