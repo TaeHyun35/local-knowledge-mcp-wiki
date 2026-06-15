@@ -70,31 +70,54 @@
         <section>
           <h3>Special Wiki Tools</h3>
           <div class="feature-grid">
-            <div class="feature">
+            <button class="feature" data-tool="quality_report" type="button">
               <strong>Quality Gate</strong>
               <span id="qualityStatus">-</span>
               <small id="qualityDetail"></small>
-            </div>
-            <div class="feature">
+            </button>
+            <button class="feature" data-tool="trace_claim" type="button">
               <strong>Claim Trace</strong>
               <span id="claimTrace">-</span>
               <small id="claimTraceDetail"></small>
-            </div>
-            <div class="feature">
+            </button>
+            <button class="feature" data-tool="create_wiki_draft" type="button">
               <strong>Draft Pipeline</strong>
               <span id="draftPipeline">-</span>
               <small id="draftPipelineDetail"></small>
-            </div>
+            </button>
           </div>
         </section>
         <section>
-          <h3>Wiki Graph Preview</h3>
-          <div class="graph-legend">
-            <span class="legend risk"></span>Risk
-            <span class="legend control"></span>Control
-            <span class="legend framework"></span>Framework
+          <h3>Source Coverage</h3>
+          <div class="coverage-grid" id="coverageGrid"></div>
+        </section>
+        <section>
+          <h3>Evidence Trace</h3>
+          <div class="trace-panel">
+            <div id="traceSteps" class="trace-steps"></div>
+            <div id="traceDetail" class="trace-detail"></div>
           </div>
-          <div id="graph" class="graph"></div>
+        </section>
+        <section>
+          <h3>Reading Deck</h3>
+          <div class="deck-toolbar">
+            <button id="favoritePage" class="deck-action" type="button">Save current page</button>
+            <span id="deckStatus" role="status">No saved pages yet.</span>
+          </div>
+          <div id="readingDeck" class="reading-deck"></div>
+        </section>
+        <section>
+          <h3>Wiki Graph Preview</h3>
+          <div class="graph-toolbar">
+            <div class="graph-legend">
+              <span class="legend risk"></span>Risk
+              <span class="legend control"></span>Control
+              <span class="legend framework"></span>Framework
+            </div>
+            <div class="graph-selection">Selected: <strong id="graphSelectedLabel">Prompt Injection</strong></div>
+          </div>
+          <div id="graph" class="graph" aria-label="Interactive wiki graph"></div>
+          <p class="graph-hint">Click a node to switch pages. Bright links show the selected page neighborhood.</p>
         </section>
       </article>
     </main>

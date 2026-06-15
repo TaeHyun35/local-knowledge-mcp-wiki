@@ -10,8 +10,18 @@
   let selectedTool = "map_risk_to_controls";
   let query = "";
   let filter = "all";
+  let savedPages = loadSavedPages();
 
   const typeOrder = { risk: 0, control: 1, framework: 2, query: 3, concept: 4 };
+  const graphLaneX = { risk: 34, control: 340, framework: 650, query: 650, concept: 650 };
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
 
   function currentPage() {
     return bySlug.get(selectedSlug) || pages[0];
@@ -19,6 +29,22 @@
 
   function currentDetail() {
     return details[selectedSlug] || data.selected.page;
+  }
+
+  function loadSavedPages() {
+    try {
+      return JSON.parse(localStorage.getItem("wiki-reading-deck") || "[]").filter((slug) => bySlug.has(slug));
+    } catch {
+      return [];
+    }
+  }
+
+  function persistSavedPages() {
+    try {
+      localStorage.setItem("wiki-reading-deck", JSON.stringify(savedPages));
+    } catch {
+      document.getElementById("deckStatus").textContent = "Reading Deck cannot be persisted in this browser.";
+    }
   }
 
   function pageText(slug) {
@@ -61,7 +87,7 @@
       .filter(pageMatches)
       .sort((a, b) => a.title.localeCompare(b.title));
     target.innerHTML = items.length
-      ? items.map((page) => `<button class="nav-item ${page.slug === selectedSlug ? "active" : ""}" data-slug="${page.slug}" type="button"><span>${page.title}</span><small>${page.review_status}</small></button>`).join("")
+      ? items.map((page) => `<button class="nav-item ${page.slug === selectedSlug ? "active" : ""}" data-slug="${page.slug}" type="button" aria-pressed="${page.slug === selectedSlug}"><span>${escapeHtml(page.title)}</span><small>${escapeHtml(page.review_status)}</small></button>`).join("")
       : `<div class="empty-state">No ${type} pages</div>`;
   }
 
@@ -91,6 +117,20 @@
     const detail = currentDetail();
     const sources = detail.meta?.sources || [];
     return Array.isArray(sources) ? sources : [sources].filter(Boolean);
+  }
+
+  function sourceCoverageFor(page) {
+    const coverage = data.coverage.pages.find((item) => item.slug === page.slug);
+    const quality = data.quality.pages.find((item) => item.slug === page.slug);
+    const sources = sourceList();
+    return {
+      sources,
+      sourceCount: sources.length,
+      declaredCount: coverage?.declared_source_count || page.source_count || sources.length,
+      hasEvidenceMap: Boolean(coverage?.has_evidence_map),
+      score: quality?.score || 0,
+      status: quality?.status || "unknown"
+    };
   }
 
   const toolInfo = {
@@ -139,8 +179,11 @@
     },
     source_coverage: {
       description: "Check source file, Evidence Map, and source_count coverage.",
-      request: () => ({}),
-      result: () => [`pages: ${data.coverage.page_count}`, `missing sources: ${data.coverage.missing_source_count}`, `missing evidence maps: ${data.coverage.missing_evidence_map_count}`, `blocking: ${data.coverage.blocking_issue_count}`]
+      request: () => ({ page_id: selectedSlug }),
+      result: () => {
+        const coverage = sourceCoverageFor(currentPage());
+        return [`selected: ${selectedSlug}`, `sources: ${coverage.sourceCount}`, `evidence map: ${coverage.hasEvidenceMap}`, `quality: ${coverage.score}/100`];
+      }
     },
     trace_page: {
       description: "Trace selected page to sources and graph edges.",
@@ -182,8 +225,9 @@
     document.getElementById("selectedToolName").textContent = selectedTool;
     document.getElementById("selectedToolDescription").textContent = info.description;
     document.getElementById("toolRequest").textContent = JSON.stringify(request, null, 2);
-    document.getElementById("toolResult").innerHTML = result.length ? result.map((line) => `<div>${line}</div>`).join("") : "<div>No preview result.</div>";
+    document.getElementById("toolResult").innerHTML = result.length ? result.map((line) => `<div>${escapeHtml(line)}</div>`).join("") : "<div>No preview result.</div>";
     document.querySelectorAll("[data-tool]").forEach((button) => button.classList.toggle("active", button.getAttribute("data-tool") === selectedTool));
+    document.querySelectorAll("[data-tool]").forEach((button) => button.setAttribute("aria-pressed", String(button.getAttribute("data-tool") === selectedTool)));
   }
 
   function renderMeta(detail) {
@@ -195,6 +239,48 @@
       ["outgoing", outgoingFor(selectedSlug).length]
     ];
     document.getElementById("metaStrip").innerHTML = items.map(([label, value]) => `<div><span>${label}</span><strong>${value}</strong></div>`).join("");
+  }
+
+  function renderSourceCoverage(page) {
+    const coverage = sourceCoverageFor(page);
+    const cards = [
+      ["Declared Sources", coverage.declaredCount],
+      ["Resolved Sources", coverage.sourceCount],
+      ["Evidence Map", coverage.hasEvidenceMap ? "present" : "missing"],
+      ["Quality Score", `${coverage.score}/100`]
+    ];
+    document.getElementById("coverageGrid").innerHTML = cards.map(([label, value]) => `<button class="coverage-card" data-tool="source_coverage" type="button"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></button>`).join("");
+  }
+
+  function renderEvidenceTrace(page, evidence) {
+    const sources = sourceList();
+    const traceItems = [
+      { label: "Raw Source", value: sources[0] || "No source", tool: "source_coverage" },
+      { label: "Wiki Page", value: page.path, tool: "read_page" },
+      { label: "Evidence Map", value: `${evidence.length} claims`, tool: "trace_claim" },
+      { label: "Quality Gate", value: sourceCoverageFor(page).status, tool: "quality_report" }
+    ];
+    document.getElementById("traceSteps").innerHTML = traceItems.map((item, index) => `<button class="trace-step" data-tool="${item.tool}" type="button"><span>${index + 1}</span><strong>${escapeHtml(item.label)}</strong><small>${escapeHtml(item.value)}</small></button>`).join("");
+    const firstClaim = evidence[0];
+    document.getElementById("traceDetail").innerHTML = firstClaim
+      ? `<strong>${escapeHtml(firstClaim.claim)}</strong><span>${escapeHtml(firstClaim.evidence)} · ${escapeHtml(firstClaim.status)}</span>`
+      : `<strong>No claim rows</strong><span>Run trace_claim after adding Evidence Map rows.</span>`;
+  }
+
+  function renderReadingDeck() {
+    const favoriteButton = document.getElementById("favoritePage");
+    const isSaved = savedPages.includes(selectedSlug);
+    favoriteButton.classList.toggle("active", isSaved);
+    favoriteButton.textContent = isSaved ? "Saved in deck" : "Save current page";
+    document.getElementById("deckStatus").textContent = savedPages.length
+      ? `${savedPages.length} saved page${savedPages.length === 1 ? "" : "s"}`
+      : "No saved pages yet.";
+    document.getElementById("readingDeck").innerHTML = savedPages.length
+      ? savedPages.map((slug) => {
+        const page = bySlug.get(slug);
+        return `<div class="deck-item ${slug === selectedSlug ? "active" : ""}"><button data-slug="${slug}" type="button"><strong>${escapeHtml(page.title)}</strong><span>${escapeHtml(page.type)} · ${escapeHtml(page.review_status)}</span></button><button class="deck-remove" data-remove-deck="${slug}" type="button" aria-label="remove ${escapeHtml(page.title)}">Remove</button></div>`;
+      }).join("")
+      : `<div class="empty-state">Save pages while reviewing risks, controls, and frameworks.</div>`;
   }
 
   function renderPage() {
@@ -210,47 +296,71 @@
     document.getElementById("reviewPill").textContent = page.review_status;
     document.getElementById("pathText").textContent = page.path;
     document.getElementById("summaryText").textContent = summary;
+    document.getElementById("graphSelectedLabel").textContent = page.title;
     renderMeta(detail);
+    renderSourceCoverage(page);
 
     document.getElementById("controlCards").innerHTML = controls.length
-      ? controls.map((control) => `<button class="card" data-slug="${control.slug}" type="button"><strong>${control.title}</strong><span>${control.path}</span></button>`).join("")
+      ? controls.map((control) => `<button class="card ${control.slug === selectedSlug ? "active" : ""}" data-slug="${control.slug}" type="button" aria-pressed="${control.slug === selectedSlug}"><strong>${escapeHtml(control.title)}</strong><span>${escapeHtml(control.path)}</span></button>`).join("")
       : `<div class="card"><strong>No direct controls</strong><span>Use graph or search to inspect related pages.</span></div>`;
 
     document.querySelector("tbody").innerHTML = evidence.length
-      ? evidence.map((row) => `<tr><td>${row.claim}</td><td>${row.evidence}</td><td>${row.status}</td></tr>`).join("")
+      ? evidence.map((row) => `<tr><td>${escapeHtml(row.claim)}</td><td>${escapeHtml(row.evidence)}</td><td>${escapeHtml(row.status)}</td></tr>`).join("")
       : `<tr><td colspan="3">No Evidence Map rows in bundled page detail.</td></tr>`;
+    renderEvidenceTrace(page, evidence);
+    renderReadingDeck();
 
     renderGraph();
     renderNav();
     renderInspector();
   }
 
-  function graphPosition(node, index, groupCounts) {
-    const column = typeOrder[node.type] ?? 3;
+  function graphPosition(node, visibleNodes, groupCounts) {
     const total = groupCounts[node.type] || 1;
-    const orderInType = graphNodes.filter((item) => item.type === node.type).findIndex((item) => item.id === node.id);
-    const x = 34 + column * 255;
-    const y = 28 + (orderInType + 1) * (166 / (total + 1));
-    return { x, y };
+    const orderInType = visibleNodes.filter((item) => item.type === node.type).findIndex((item) => item.id === node.id);
+    const x = graphLaneX[node.type] ?? (34 + (typeOrder[node.type] ?? 3) * 250);
+    const y = 42 + (orderInType + 1) * (214 / (total + 1));
+    const width = Math.max(112, Math.min(214, node.label.length * 7.4 + 28));
+    return { x, y, width };
   }
 
   function renderGraph() {
     const graph = document.getElementById("graph");
     const visibleNodes = graphNodes.filter((node) => node.type !== "query").slice(0, 13);
     const groupCounts = visibleNodes.reduce((acc, node) => ({ ...acc, [node.type]: (acc[node.type] || 0) + 1 }), {});
-    const positioned = new Map(visibleNodes.map((node, index) => [node.id, { ...node, ...graphPosition(node, index, groupCounts) }]));
-    const visibleEdges = graphEdges.filter((edge) => positioned.has(edge.source) && positioned.has(edge.target)).slice(0, 28);
+    const positioned = new Map(visibleNodes.map((node) => [node.id, { ...node, ...graphPosition(node, visibleNodes, groupCounts) }]));
+    const neighborhood = new Set([selectedSlug]);
+    graphEdges.forEach((edge) => {
+      if (edge.source === selectedSlug) neighborhood.add(edge.target);
+      if (edge.target === selectedSlug) neighborhood.add(edge.source);
+    });
+    const edgeMap = new Map();
+    graphEdges
+      .filter((edge) => positioned.has(edge.source) && positioned.has(edge.target))
+      .forEach((edge) => {
+        const key = `${edge.source}->${edge.target}`;
+        if (!edgeMap.has(key) || edge.source === selectedSlug || edge.target === selectedSlug) edgeMap.set(key, edge);
+      });
+    const visibleEdges = [...edgeMap.values()];
     const edgeHtml = visibleEdges.map((edge) => {
       const a = positioned.get(edge.source);
       const b = positioned.get(edge.target);
-      const dx = b.x - a.x;
-      const dy = b.y - a.y;
-      const len = Math.sqrt(dx * dx + dy * dy);
-      const angle = Math.atan2(dy, dx) * 180 / Math.PI;
-      return `<div class="edge" title="${edge.type}" style="left:${a.x + 58}px;top:${a.y + 15}px;width:${len}px;transform:rotate(${angle}deg)"></div>`;
+      const startX = a.x + a.width;
+      const startY = a.y + 16;
+      const endX = b.x;
+      const endY = b.y + 16;
+      const bend = Math.max(80, Math.abs(endX - startX) * 0.42);
+      const d = `M ${startX} ${startY} C ${startX + bend} ${startY}, ${endX - bend} ${endY}, ${endX} ${endY}`;
+      const active = edge.source === selectedSlug || edge.target === selectedSlug;
+      const related = neighborhood.has(edge.source) && neighborhood.has(edge.target);
+      return `<path class="edge ${edge.type} ${active ? "active" : related ? "related" : "dim"}" d="${d}" marker-end="url(#arrow)" />`;
     }).join("");
-    const nodeHtml = [...positioned.values()].map((node) => `<button class="node ${node.type} ${node.id === selectedSlug ? "active" : ""}" data-slug="${node.id}" type="button" style="left:${node.x}px;top:${node.y}px">${node.label}</button>`).join("");
-    graph.innerHTML = edgeHtml + nodeHtml;
+    const nodeHtml = [...positioned.values()].map((node) => {
+      const active = node.id === selectedSlug;
+      const related = neighborhood.has(node.id);
+      return `<button class="node ${node.type} ${active ? "active" : related ? "related" : "dim"}" data-slug="${node.id}" type="button" aria-pressed="${active}" style="left:${node.x}px;top:${node.y}px;width:${node.width}px">${escapeHtml(node.label)}</button>`;
+    }).join("");
+    graph.innerHTML = `<svg class="graph-svg" viewBox="0 0 900 320" aria-hidden="true"><defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" /></marker></defs>${edgeHtml}</svg>${nodeHtml}`;
   }
 
   function renderToolButtons() {
@@ -261,6 +371,14 @@
   }
 
   document.addEventListener("click", (event) => {
+    const deckRemoveTarget = event.target.closest("[data-remove-deck]");
+    if (deckRemoveTarget) {
+      const slug = deckRemoveTarget.getAttribute("data-remove-deck");
+      savedPages = savedPages.filter((item) => item !== slug);
+      persistSavedPages();
+      renderReadingDeck();
+      return;
+    }
     const toolTarget = event.target.closest("[data-tool]");
     if (toolTarget) {
       selectedTool = toolTarget.getAttribute("data-tool");
@@ -296,6 +414,14 @@
     document.getElementById("searchInput").value = "";
     document.querySelectorAll("[data-filter]").forEach((button) => button.classList.toggle("active", button.getAttribute("data-filter") === "all"));
     renderPage();
+  });
+
+  document.getElementById("favoritePage").addEventListener("click", () => {
+    savedPages = savedPages.includes(selectedSlug)
+      ? savedPages.filter((slug) => slug !== selectedSlug)
+      : [selectedSlug, ...savedPages].slice(0, 6);
+    persistSavedPages();
+    renderReadingDeck();
   });
 
   document.getElementById("pageCount").textContent = data.summary.page_count;
