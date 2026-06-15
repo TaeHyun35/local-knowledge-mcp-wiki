@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Wiki Page Frontmatter",
+  "type": "object",
+  "required": ["title", "type", "review_status", "quality_class", "source_count", "sources", "stale"],
+  "properties": {
+    "title": { "type": "string" },
+    "type": { "type": "string" },
+    "review_status": { "type": "string" },
+    "quality_class": { "type": "string" },
+    "source_count": { "type": ["integer", "string"] },
+    "sources": { "type": ["array", "string"] },
+    "stale": { "type": ["boolean", "string"] }
+  }
+}

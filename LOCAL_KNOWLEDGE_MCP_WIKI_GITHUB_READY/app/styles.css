@@ -1,0 +1,49 @@
+* { box-sizing: border-box; }
+body { margin: 0; background: #0f1117; color: #e8eaf0; font-family: "Segoe UI", Arial, sans-serif; }
+.shell { min-height: 100vh; display: grid; grid-template-columns: 320px 1fr 360px; }
+.sidebar { background: #171a22; border-right: 1px solid #2a2f3b; padding: 18px; overflow: auto; }
+.brand h1 { font-size: 25px; line-height: 1.1; margin: 0 0 8px; }
+.brand p { color: #aab2c0; margin: 0 0 22px; }
+.ok { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #4ade80; margin-right: 6px; }
+.search { width: 100%; background: #0e1118; border: 1px solid #323849; color: #d7dcea; padding: 12px 13px; border-radius: 8px; margin-bottom: 18px; font-size: 14px; }
+.nav-section h2 { color: #8892a6; text-transform: uppercase; font-size: 12px; letter-spacing: .08em; margin: 22px 0 10px; }
+.nav-item { padding: 8px 10px; border-radius: 7px; margin: 3px 0; color: #dce1ea; border-left: 3px solid transparent; }
+.nav-item.active { background: #253047; border-left-color: #7aa2ff; }
+.content { padding: 24px 34px 36px; overflow: auto; }
+.topbar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #303647; padding-bottom: 14px; margin-bottom: 24px; }
+.pill { background: #263149; color: #dce6ff; padding: 5px 12px; border-radius: 999px; font-size: 13px; margin-right: 8px; }
+.pill.warning { background: #4a3722; color: #ffd69c; }
+.muted { color: #9ba5b8; }
+.stats { color: #aab2c0; display: flex; gap: 14px; }
+.stats strong { color: #ffffff; }
+.page { max-width: 980px; }
+.page h2 { font-size: 40px; margin: 0 0 18px; }
+.page h3 { font-size: 20px; margin: 26px 0 10px; }
+.page p { color: #d5dae5; line-height: 1.65; }
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.card { background: #171c27; border: 1px solid #31384a; border-radius: 8px; padding: 14px; min-height: 86px; }
+.card strong { display: block; margin-bottom: 8px; }
+.feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.feature { background: #151923; border: 1px solid #31384a; border-radius: 8px; padding: 14px; min-height: 112px; }
+.feature strong { display: block; color: #f4f7fb; margin-bottom: 10px; }
+.feature span { display: block; color: #8fb3ff; font-weight: 700; margin-bottom: 8px; }
+.feature small { display: block; color: #aeb7c8; line-height: 1.45; word-break: break-word; }
+table { width: 100%; border-collapse: collapse; background: #151923; border: 1px solid #303647; border-radius: 8px; overflow: hidden; }
+th, td { text-align: left; padding: 12px; border-bottom: 1px solid #2b3140; vertical-align: top; }
+th { color: #b8c0d2; background: #1b2030; }
+.graph { height: 220px; background: #11151f; border: 1px solid #303647; border-radius: 8px; position: relative; overflow: hidden; }
+.node { position: absolute; border-radius: 999px; padding: 6px 10px; background: #24324d; border: 1px solid #5b7ed1; font-size: 12px; white-space: nowrap; }
+.node.control { background: #1d3a33; border-color: #42b883; }
+.node.framework { background: #3b2e20; border-color: #d49b42; }
+.edge { position: absolute; height: 1px; background: #4c566d; transform-origin: left center; }
+.agent { background: #181c26; border-left: 1px solid #2a2f3b; display: flex; flex-direction: column; }
+.agent header { display: flex; justify-content: space-between; align-items: center; padding: 18px; border-bottom: 1px solid #303647; }
+.agent h2 { margin: 0; font-size: 20px; }
+.agent button { background: #2b3650; color: #dce6ff; border: 0; border-radius: 8px; padding: 8px 12px; }
+.message { margin: 16px 18px 0; padding: 14px; border-radius: 12px; line-height: 1.5; }
+.message.user { background: #2f4168; align-self: flex-end; }
+.message.bot { background: #222837; }
+.toolbox, .health { margin: 18px; background: #121722; border: 1px solid #2f3647; border-radius: 8px; padding: 14px; }
+.toolbox h3, .health h3 { margin: 0 0 10px; }
+.tool { display: inline-block; background: #263149; color: #dce6ff; padding: 6px 8px; border-radius: 7px; margin: 4px; font-size: 12px; }
+.health p { margin: 8px 0; color: #cfd6e5; }

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Governance Control Wiki</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>AI Governance<br>Control Wiki</h1>
+        <p><span class="ok"></span>validate OK · MCP served</p>
+      </div>
+      <input class="search" value="prompt injection" aria-label="search">
+      <div class="nav-section">
+        <h2>Risks</h2>
+        <div id="riskList"></div>
+      </div>
+      <div class="nav-section">
+        <h2>Controls</h2>
+        <div id="controlList"></div>
+      </div>
+      <div class="nav-section">
+        <h2>Frameworks</h2>
+        <div id="frameworkList"></div>
+      </div>
+    </aside>
+    <main class="content">
+      <header class="topbar">
+        <div>
+          <span class="pill">risk</span>
+          <span class="pill ok">mvp_validated</span>
+          <span class="muted">NIST AI RMF · OWASP LLM Top 10 · MITRE ATLAS</span>
+        </div>
+        <div class="stats">
+          <strong id="pageCount">0</strong> pages
+          <strong id="edgeCount">0</strong> edges
+        </div>
+      </header>
+      <article class="page">
+        <h2 id="pageTitle">Prompt Injection</h2>
+        <section>
+          <h3>Summary</h3>
+          <p id="summaryText"></p>
+        </section>
+        <section>
+          <h3>Related Controls</h3>
+          <div id="controlCards" class="cards"></div>
+        </section>
+        <section>
+          <h3>Evidence Map</h3>
+          <table>
+            <thead><tr><th>Claim</th><th>Evidence</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Prompt injection is a major LLM application risk.</td><td>OWASP LLM Top 10</td><td>mvp_validated</td></tr>
+              <tr><td>Tool boundaries reduce action blast radius.</td><td>Tool Permission Boundary</td><td>mvp_validated</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section>
+          <h3>Special Wiki Tools</h3>
+          <div class="feature-grid">
+            <div class="feature">
+              <strong>Quality Gate</strong>
+              <span id="qualityStatus">-</span>
+              <small id="qualityDetail"></small>
+            </div>
+            <div class="feature">
+              <strong>Claim Trace</strong>
+              <span id="claimTrace">-</span>
+              <small id="claimTraceDetail"></small>
+            </div>
+            <div class="feature">
+              <strong>Draft Pipeline</strong>
+              <span id="draftPipeline">-</span>
+              <small id="draftPipelineDetail"></small>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3>Wiki Graph Preview</h3>
+          <div id="graph" class="graph"></div>
+        </section>
+      </article>
+    </main>
+    <aside class="agent">
+      <header>
+        <h2>Governance Agent</h2>
+        <button>Reset</button>
+      </header>
+      <div class="message user">What controls map to prompt injection?</div>
+      <div class="message bot">
+        <strong>MCP Tool:</strong> map_risk_to_controls<br>
+        <span id="mappingText"></span>
+      </div>
+      <div class="toolbox">
+        <h3>MCP Tools</h3>
+        <div id="toolList"></div>
+      </div>
+      <div class="health">
+        <h3>Health</h3>
+        <p>Missing sources: <strong>0</strong></p>
+        <p>Missing Evidence Map: <strong>0</strong></p>
+        <p>Review queue: <strong id="reviewCount">0</strong></p>
+      </div>
+    </aside>
+  </div>
+  <script src="wiki-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
